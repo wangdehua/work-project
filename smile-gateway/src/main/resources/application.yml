@@ -1,0 +1,36 @@
+spring:
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+    timeout: 10000
+    password: ${REDIS_PASSWORD:}
+
+  sleuth:
+    enabled: true
+    http:
+      legacy:
+        enabled: true
+  #jwt密码
+  security:
+    oauth2:
+      jwt:
+        signingKey: 123456
+  cloud:
+    gateway:
+      default-filters:
+        - name: Retry
+          args:
+            retries: 3
+            statuses: BAD_GATEWAY
+        - AddResponseHeader=X-Response-Default-Foo, Default-Bar
+feign:
+  sentinel:
+    enabled: true
+  okhttp:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

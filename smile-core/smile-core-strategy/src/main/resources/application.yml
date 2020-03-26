@@ -1,0 +1,30 @@
+spring:
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+    timeout: 10000
+    password: ${REDIS_PASSWORD:}
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:${DATASOURCE_DBTYPE:mysql}://${DATASOURCE_HOST:47.111.133.13}:${DATASOURCE_PORT:3306}/smile_db?characterEncoding=UTF-8&useUnicode=true&useSSL=false&serverTimezone=UTC
+    username: ${DATASOURCE_USERNAME:root}
+    password: ${DATASOURCE_PASSWORD:123456}
+
+  sleuth:
+    enabled: true
+    http:
+      legacy:
+        enabled: true
+
+feign:
+  sentinel:
+    enabled: true
+  okhttp:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
